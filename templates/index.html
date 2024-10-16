@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Header styles */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+        }
+
+        /* Blog list styles */
+        .blog-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .blog-item {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            padding: 15px;
+            transition: transform 0.2s;
+        }
+
+        .blog-item:hover {
+            transform: scale(1.02);
+        }
+
+        .blog-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2980b9;
+        }
+
+        .blog-date {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        /* Form styles */
+        .blog-form {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .submit-button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Blog Posts</h1>
+<ul class="blog-list">
+    {% for blog in blogs %}
+        <li class="blog-item">
+            <div class="blog-title">{{ blog.title }}</div>
+            <div class="blog-date">{{ blog.created_at|date:"F j, Y" }}</div>
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Create a New Blog</h2>
+<form method="post" class="blog-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="submit-button">Create</button>
+</form>
+
+</body>
+</html>
